@@ -1,0 +1,24 @@
+###########################################
+# Datatypes (KEYWORD1)
+###########################################
+Task	KEYWORD1
+###########################################
+# Methods and Functions (KEYWORD2)
+###########################################
+configure	KEYWORD2
+launch	KEYWORD2
+launchWithDelay	KEYWORD2
+run	KEYWORD2
+complete	KEYWORD2
+reset	KEYWORD2
+getStatus	KEYWORD2
+###########################################
+# Constants (LITERAL1)
+###########################################
+TASK_STATUS	LITERAL1
+TASK_NONE	LITERAL1
+TASK_RUNNING	LITERAL1
+TASK_COMPLETED	LITERAL1
+TASK_NONE_TYPE	LITERAL1
+TASK_NORMAL_TYPE	LITERAL1
+TASK_DELAYED_TYPE	LITERAL1
