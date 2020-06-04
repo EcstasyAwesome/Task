@@ -23,8 +23,7 @@ void Task::configure(void (*initialization)(void), void (*finalization)(void)) {
  */
 
 void Task::launch(const uint32_t work, const uint32_t wait, const uint16_t iterations) {
-  if (_initialization != NULL && _finalization != NULL) {
-    Task::reset();
+  if (_initialization != NULL && _finalization != NULL && _status != TASK_RUNNING) {
 	_delayed = false;
     _status = TASK_RUNNING;
     _work = work;
@@ -43,8 +42,7 @@ void Task::launch(const uint32_t work, const uint32_t wait, const uint16_t itera
  */
 
 void Task::launchWithDelay(const uint32_t work, const uint32_t wait, const uint16_t iterations) {
-  if (_initialization != NULL) {
-    Task::reset();
+  if (_initialization != NULL && _status != TASK_RUNNING) {
     _delayed = true;
     _status = TASK_RUNNING;
     _work = work;
