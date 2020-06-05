@@ -20,16 +20,19 @@ void Task::configure(void (*initialization)(void), void (*finalization)(void)) {
  *        time (ms) before starting a new iteration (Default is 0)
  * @param iterations
  *        amount repeating of task (Default is 1)
+ * @return true if the operation is successful
  */
 
-void Task::launch(const uint32_t work, const uint32_t wait, const uint16_t iterations) {
+bool Task::launch(const uint32_t work, const uint32_t wait, const uint16_t iterations) {
   if (_initialization != NULL && _finalization != NULL && _status != TASK_RUNNING) {
 	_delayed = false;
     _status = TASK_RUNNING;
     _work = work;
     _wait = wait;
     _iterations = iterations;
+	return true;
   }
+  return false;
 }
 
 /*
@@ -39,16 +42,19 @@ void Task::launch(const uint32_t work, const uint32_t wait, const uint16_t itera
  *        time (ms) before starting a new iteration (Default is 0)
  * @param iterations
  *        amount repeating of task (Default is 1)
+ * @return true if the operation is successful
  */
 
-void Task::launchWithDelay(const uint32_t work, const uint32_t wait, const uint16_t iterations) {
+bool Task::launchWithDelay(const uint32_t work, const uint32_t wait, const uint16_t iterations) {
   if (_initialization != NULL && _status != TASK_RUNNING) {
     _delayed = true;
     _status = TASK_RUNNING;
     _work = work;
     _wait = wait;
     _iterations = iterations;
+	return true;
   }
+  return false;
 }
 
 /*
@@ -85,28 +91,34 @@ taskInitializationPoint:
 
 /*
  * Interrupts a task
+ * @return true if the operation is successful
  */
 
-void Task::complete() {
+bool Task::complete() {
   if (_status == TASK_RUNNING) {
     if (!_delayed && _launched) _finalization();
     _launched = false;
 	_awaiting = false;
     _status = TASK_COMPLETED;
+	return true;
   }
+  return false;
 }
 
 /*
  * Interrupts a task and resets a state
+ * @return true if the operation is successful
  */
 
-void Task::reset() {
+bool Task::reset() {
   if (_status != TASK_NONE) {
     if (!_delayed && _launched) _finalization();
     _launched = false;
 	_awaiting = false;
     _status = TASK_NONE;
+	return true;
   }
+  return false;
 }
 
 /*

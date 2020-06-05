@@ -22,11 +22,11 @@ class Task {
     void (*_finalization)(void);
   public:
     void configure(void (*initialization)(void) = NULL, void (*finalization)(void) = NULL);
-    void launch(const uint32_t work, const uint32_t wait = 0, const uint16_t iterations = 1);
-    void launchWithDelay(const uint32_t work, const uint32_t wait = 0, const uint16_t iterations = 1);
-    void run();
-    void complete();
-    void reset();
+	void run();
+    bool launch(const uint32_t work, const uint32_t wait = 0, const uint16_t iterations = 1);
+    bool launchWithDelay(const uint32_t work, const uint32_t wait = 0, const uint16_t iterations = 1);
+    bool complete();
+    bool reset();
     TASK_STATUS getStatus();
 };
 
